@@ -1,20 +1,27 @@
-import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
+import recipes from './src/data/recipes.js';
+import Recipe from './src/screens/Recipe.js';
 
-export default function App() {
+export default function App() {    
   return (    
-    <View style={styles.container}>
-      <TouchableOpacity style={styles.card}>
-        <View style={styles.card__image}>
-          <Image             
-            style={styles.image}
-            source={require('./assets/Images/meal.jpg')}
-          />
-        </View>
-        <View style={styles.card__footer}>
-          <Text style={styles.recipe_title}>Best receipe in the world</Text>
-        </View>
-      </TouchableOpacity>
-    </View>
+    <ScrollView>
+      <View style={styles.container}>      
+        {recipes.map((recipe, index) => (                
+          <TouchableOpacity key={index} style={styles.card}>          
+            <View style={styles.card__image}>            
+              <Image             
+                style={styles.image}
+                source={recipe.image}
+              />
+            </View>
+            <View style={styles.card__footer}>
+              <Text style={styles.recipe_title}>{recipe.name}</Text>
+            </View>          
+          </TouchableOpacity>
+        ))}
+      </View>
+      <Recipe/>
+    </ScrollView>
   );
 }
 
